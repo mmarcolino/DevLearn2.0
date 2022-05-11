@@ -1,6 +1,12 @@
 package br.com.devLearn.application.model
 
-data class UserModel(
+import javax.persistence.*
+
+@Entity
+@Table(name = "user")
+data class User(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val username: String,
     val password: String,
