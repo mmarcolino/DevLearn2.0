@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
 	runtimeOnly ("org.postgresql:postgresql")
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")

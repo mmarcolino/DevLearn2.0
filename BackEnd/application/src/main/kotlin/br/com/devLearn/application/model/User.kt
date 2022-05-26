@@ -8,8 +8,8 @@ data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    val username: String,
-    val password: String,
-    val name: String,
+    var username: String,
+    var password: String,
+    var name: String,
 )
 
