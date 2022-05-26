@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component
 class UserViewMapper: DefaultMapper<User, UserViewDto> {
     override fun map(user: User): UserViewDto {
         return UserViewDto(
+            id = user.id!!,
             username = user.username,
             password = user.password,
             name = user.name
