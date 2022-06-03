@@ -8,7 +8,7 @@ data class UserStoreDto (
     @field:Size(min = 2, max = 15)
     var username: String,
     @field:NotEmpty
-    @field:Size(min = 8, max = 16)
+    @field:Size(min = 8)
     var password: String,
     @field:NotEmpty
     var name: String,
