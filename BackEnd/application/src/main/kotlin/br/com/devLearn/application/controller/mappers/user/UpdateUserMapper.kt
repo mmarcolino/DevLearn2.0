@@ -7,13 +7,14 @@ import org.springframework.stereotype.Component
 
 @Component
 class UpdateUserMapper: UpdateMapper<UpdateUserDto, User> {
-    override fun map(dto: UpdateUserDto, user: User) {
+    override fun map(dto: UpdateUserDto, user: User):User {
         if (!dto.username.isNullOrBlank()){
             user.username = dto.username!!
         }
         if (!dto.password.isNullOrBlank()){
             user.password = dto.password!!
         }
+        return user
     }
 
 }
