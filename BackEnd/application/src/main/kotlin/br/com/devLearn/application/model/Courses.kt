@@ -12,5 +12,5 @@ data class Courses(
     @ManyToOne
     val author: User,
     @ManyToOne
-    val category: Category
+    val category: Category,
 )
