@@ -8,7 +8,7 @@ data class Courses(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     val name: String,
-    val desription: String,
+    val description: String,
     @ManyToOne
     val author: User,
     @ManyToOne

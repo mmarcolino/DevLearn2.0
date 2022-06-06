@@ -3,18 +3,14 @@ package br.com.devLearn.application.integration
 import br.com.devLearn.application.model.Category
 import br.com.devLearn.application.model.Courses
 import br.com.devLearn.application.model.User
-import br.com.devLearn.application.model.Videos
 import br.com.devLearn.application.repository.CategoryRepository
 import br.com.devLearn.application.repository.CoursesRepository
 import br.com.devLearn.application.repository.UserRepository
-import br.com.devLearn.application.repository.VideosRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import java.sql.Date
-import java.time.LocalDate
 
 @DataJpaTest
 class CoursesRepositoryTest {
@@ -55,7 +51,7 @@ class CoursesRepositoryTest {
         //then
         Assertions.assertEquals(subject.id, result.id)
         Assertions.assertEquals(subject.name, result.name)
-        Assertions.assertEquals(subject.desription, result.desription)
+        Assertions.assertEquals(subject.description, result.description)
         Assertions.assertEquals(subject.author, result.author)
         Assertions.assertEquals(subject.category, result.category)
     }
@@ -84,7 +80,7 @@ class CoursesRepositoryTest {
         //then
         Assertions.assertEquals(subject.id, result.id)
         Assertions.assertEquals(subject.name, result.name)
-        Assertions.assertEquals(subject.desription, result.desription)
+        Assertions.assertEquals(subject.description, result.description)
         Assertions.assertEquals(subject.author, result.author)
         Assertions.assertEquals(subject.category, result.category)
     }
