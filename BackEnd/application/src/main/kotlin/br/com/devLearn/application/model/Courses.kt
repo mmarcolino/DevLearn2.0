@@ -10,7 +10,7 @@ data class Courses(
     var name: String,
     val description: String,
     @ManyToOne
-    val author: User,
+    val author: Users,
     @ManyToOne
-    var category: Category,
+    var categories: Categories,
 )

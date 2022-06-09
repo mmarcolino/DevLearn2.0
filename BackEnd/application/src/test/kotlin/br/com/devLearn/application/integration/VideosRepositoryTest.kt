@@ -1,12 +1,12 @@
 package br.com.devLearn.application.integration
 
-import br.com.devLearn.application.model.Category
+import br.com.devLearn.application.model.Categories
 import br.com.devLearn.application.model.Courses
-import br.com.devLearn.application.model.User
+import br.com.devLearn.application.model.Users
 import br.com.devLearn.application.model.Videos
-import br.com.devLearn.application.repository.CategoryRepository
+import br.com.devLearn.application.repository.CategoriesRepository
 import br.com.devLearn.application.repository.CoursesRepository
-import br.com.devLearn.application.repository.UserRepository
+import br.com.devLearn.application.repository.UsersRepository
 import br.com.devLearn.application.repository.VideosRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
@@ -22,9 +22,9 @@ class VideosRepositoryTest {
     @Autowired
     private lateinit var videosRepository: VideosRepository
     @Autowired
-    private lateinit var userRepository: UserRepository
+    private lateinit var usersRepository: UsersRepository
     @Autowired
-    private lateinit var categoryRepository: CategoryRepository
+    private lateinit var categoriesRepository: CategoriesRepository
     @Autowired
     private lateinit var coursesRepository: CoursesRepository
 
@@ -36,11 +36,11 @@ class VideosRepositoryTest {
     @Test
     fun `Should return all videos after finding them`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
-        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
-        videosRepository.save(Videos(null, "Introdução", "Introdução sobre spring boot", Date.valueOf(LocalDate.now()), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
-        videosRepository.save(Videos(null, "Primeiros passos", "Configurando o spring boot", Date.valueOf(LocalDate.now()), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
+        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
+        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
+        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        videosRepository.save(Videos(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
+        videosRepository.save(Videos(null, "Primeiros passos", "Configurando o spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
         //when
         val result = videosRepository.findAll()
         //then
@@ -50,10 +50,10 @@ class VideosRepositoryTest {
     @Test
     fun `should return the video after finding it by id`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
-        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
-        val subject = Videos(null, "Introdução", "Introdução sobre spring boot", Date.valueOf(LocalDate.now()), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
+        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
+        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
+        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val subject = Videos(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
         val id = videosRepository.save(subject).id ?: throw java.lang.RuntimeException("Course id is null")
         //when
         val result = videosRepository.getById(id)
@@ -69,10 +69,10 @@ class VideosRepositoryTest {
     @Test
     fun `verify if the video is truly deleted`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
-        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
-        val subject = Videos(null, "Introdução", "Introdução sobre spring boot", Date.valueOf(LocalDate.now()), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
+        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
+        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
+        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val subject = Videos(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
         val id = videosRepository.save(subject).id ?: throw java.lang.RuntimeException("Course id is null")
         //when
         videosRepository.deleteById(id)
@@ -83,10 +83,10 @@ class VideosRepositoryTest {
     @Test
     fun `verify if it return the video after saving it`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
-        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
-        val subject = Videos(null, "Introdução", "Introdução sobre spring boot", Date.valueOf(LocalDate.now()), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
+        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
+        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
+        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val subject = Videos(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
         //when
         val result = videosRepository.save(subject)
         //then

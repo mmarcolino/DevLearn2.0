@@ -1,8 +1,8 @@
 package br.com.devLearn.application.unit
 
-import br.com.devLearn.application.model.Category
+import br.com.devLearn.application.model.Categories
 import br.com.devLearn.application.model.Courses
-import br.com.devLearn.application.model.User
+import br.com.devLearn.application.model.Users
 import br.com.devLearn.application.model.Videos
 import br.com.devLearn.application.repository.VideosRepository
 import br.com.devLearn.application.service.VideosService
@@ -19,10 +19,10 @@ class VideosServiceTest {
 
     private val videosRepository: VideosRepository = mockk(relaxed = true)
     private val videosService = VideosService(videosRepository)
-    private val authorEntity = User(Random.nextLong(0, Long.MAX_VALUE), "Kenma123", "12345678", "Kenma")
-    private val categoryEntity = Category(Random.nextLong(0, Long.MAX_VALUE), "Backend")
-    private val courseEntity = Courses(Random.nextLong(0, Long.MAX_VALUE), "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity)
-    private val mockedVideo = Videos(Random.nextLong(0, Long.MAX_VALUE), "Introdução", "Introdução sobre spring boot", Date.valueOf(LocalDate.now()), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
+    private val authorEntity = Users(Random.nextLong(0, Long.MAX_VALUE), "Kenma123", "12345678", "Kenma")
+    private val categoriesEntity = Categories(Random.nextLong(0, Long.MAX_VALUE), "Backend")
+    private val courseEntity = Courses(Random.nextLong(0, Long.MAX_VALUE), "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity)
+    private val mockedVideo = Videos(Random.nextLong(0, Long.MAX_VALUE), "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
     private val videoId = this.mockedVideo.id
 
     @Test
