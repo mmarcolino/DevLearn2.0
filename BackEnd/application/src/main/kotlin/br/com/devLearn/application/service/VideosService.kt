@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service
 @Service
 class VideosService (private val repository: VideosRepository,
                      private val NOT_FOUND_MESSAGE: String = "Video não encontrado"){
-    fun listVideos(): List <Videos>{
+    fun listVideos(courseName: String?): List <Videos>{
+        val videos = if(courseName.isNullOrBlank())
+            repository.findAll()
+        else
+            repository.findByCoursesName(courseName)
         return repository.findAll()
     }
 

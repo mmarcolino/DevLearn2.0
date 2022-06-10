@@ -9,8 +9,12 @@ import org.springframework.stereotype.Service
 class CoursesService(private val repository: CoursesRepository,
                      private val NOT_FOUND_MESSAGE: String = "Curso não encontrado") {
 
-    fun listCourse(): List <Courses>{
-        return repository.findAll()
+    fun listCourse(categorieName: String?): List <Courses>{
+        val courses: List<Courses> = if (categorieName.isNullOrBlank())
+            repository.findAll()
+        else
+            repository.findByCategoriesName(categorieName)
+        return courses
     }
 
     fun getCourseById(id: Long): Courses{

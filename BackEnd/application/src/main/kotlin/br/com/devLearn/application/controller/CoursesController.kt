@@ -20,8 +20,8 @@ class CoursesController(
 ) {
 
     @GetMapping
-    fun listCourses(): List<CoursesViewDto>{
-        return viewListMapper.map(service.listCourse())
+    fun listCourses(@RequestParam(required = false) categorieName: String?): List<CoursesViewDto>{
+        return viewListMapper.map(service.listCourse(categorieName))
     }
 
     @GetMapping("{id}")

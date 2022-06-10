@@ -9,7 +9,6 @@ class StoreVideosDto (
     var name: String,
     @field:NotEmpty
     var description: String,
-    @field:NotEmpty
     var date: LocalDate,
     @field:NotEmpty
     var url: String,

@@ -25,9 +25,20 @@ class CoursesServiceTest {
         //given
         every { coursesRepository.findAll() } returns emptyList()
         //when
-        val result = coursesService.listCourse()
+        val result = coursesService.listCourse("")
         //then
         verify (exactly = 1){ coursesRepository.findAll() }
+    }
+
+    @Test
+    fun `it should return all registred Courses with categorie equal to x`(){
+        //given
+        val categorieName = "teste"
+        every { coursesRepository.findByCategoriesName(categorieName) } returns emptyList()
+        //when
+        val result = coursesService.listCourse(categorieName)
+        //then
+        verify (exactly = 1){ coursesRepository.findByCategoriesName(categorieName) }
     }
 
     @Test

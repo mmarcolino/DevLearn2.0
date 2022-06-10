@@ -30,10 +30,22 @@ class VideosServiceTest {
         //given
         every { videosRepository.findAll() } returns emptyList()
         //when
-        val result = videosService.listVideos()
+        val result = videosService.listVideos("")
         //then
         verify (exactly = 1) { videosRepository.findAll() }
     }
+
+    @Test
+    fun `it should return all registred Videos with course name equal to x`(){
+        //given
+        val courseName = "teste"
+        every { videosRepository.findByCoursesName(courseName) } returns emptyList()
+        //when
+        val result = videosService.listVideos(courseName)
+        //then
+        verify (exactly = 1) { videosRepository.findByCoursesName(courseName) }
+    }
+
 
     @Test
     fun `it should return the registred video by id`(){

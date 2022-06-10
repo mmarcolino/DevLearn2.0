@@ -20,8 +20,8 @@ class VideosController(
 ) {
 
     @GetMapping
-    fun listVideos(): List<VideosViewDto>{
-        return viewListMapper.map(service.listVideos())
+    fun listVideos(@RequestParam(required = false) courseName: String?): List<VideosViewDto>{
+        return viewListMapper.map(service.listVideos(courseName))
     }
 
     @GetMapping("{id}")

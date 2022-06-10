@@ -54,7 +54,7 @@ class VideosControllerTest {
     fun `should list videos, then return ok status and response body`(){
         val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
         val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
         videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
         RestAssured
             .given()
@@ -65,16 +65,16 @@ class VideosControllerTest {
             .body("[0].id", CoreMatchers.equalTo(1))
             .body("[0].name", CoreMatchers.equalTo("Introdução"))
             .body("[0].description", CoreMatchers.equalTo("Introdução sobre Spring Boot"))
-            .body("[0].date", CoreMatchers.equalTo(LocalDate.now()))
+            .body("[0].date", CoreMatchers.equalTo("2022-06-10"))
             .body("[0].url", CoreMatchers.equalTo("https://www.youtube.com/watch?v=j5Tt8bmeCBA"))
-            .body("[0].courseId", CoreMatchers.equalTo(1))
+            .body("[0].cursoId", CoreMatchers.equalTo(1))
     }
 
     @Test
     fun `Should get video by id, then return ok status and response body`(){
         val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
         val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
         val videoId = videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
         RestAssured
             .given()
@@ -85,14 +85,17 @@ class VideosControllerTest {
             .body("id", CoreMatchers.notNullValue())
             .body("name", CoreMatchers.equalTo("Introdução"))
             .body("description", CoreMatchers.equalTo("Introdução sobre Spring Boot"))
-            .body("date",  CoreMatchers.equalTo(LocalDate.now()))
+            .body("date",  CoreMatchers.equalTo("2022-06-10"))
             .body("url", CoreMatchers.equalTo("https://www.youtube.com/watch?v=j5Tt8bmeCBA"))
-            .body("courseId", CoreMatchers.equalTo(1))
+            .body("cursoId", CoreMatchers.equalTo(1))
     }
 
     @Test
     fun `Should create a video, then return a create status and response body`(){
-        val videoJson = """{"name": "Introdução", "description": "Introdução sobre Spring Boot","date": "03/03/2022", "url": "https://www.youtube.com/watch?v=j5Tt8bmeCBA", "courseId": "1"}"""
+        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
+        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
+        coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val videoJson = """{"name": "Introdução", "description": "Introdução sobre Spring Boot","date": "2022-06-10", "url": "https://www.youtube.com/watch?v=j5Tt8bmeCBA", "cursoId": "1"}"""
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -103,16 +106,16 @@ class VideosControllerTest {
             .body("id", CoreMatchers.notNullValue())
             .body("name", CoreMatchers.equalTo("Introdução"))
             .body("description", CoreMatchers.equalTo("Introdução sobre Spring Boot"))
-            .body("date",  CoreMatchers.equalTo(LocalDate.now()))
+            .body("date",  CoreMatchers.equalTo("2022-06-10"))
             .body("url", CoreMatchers.equalTo("https://www.youtube.com/watch?v=j5Tt8bmeCBA"))
-            .body("courseId", CoreMatchers.equalTo(1))
+            .body("cursoId", CoreMatchers.equalTo(1))
     }
 
     @Test
     fun `should update a video, then return ok status and response body`(){
         val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
         val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
         val videoId = videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
         val videoJson = """{"url": "https://www.youtube.com/watch?v=wp7qctyVU2s"}"""
         RestAssured
@@ -125,16 +128,16 @@ class VideosControllerTest {
             .body("id", CoreMatchers.notNullValue())
             .body("name", CoreMatchers.equalTo("Introdução"))
             .body("description", CoreMatchers.equalTo("Introdução sobre Spring Boot"))
-            .body("date",  CoreMatchers.equalTo(LocalDate.now()))
+            .body("date",  CoreMatchers.equalTo("2022-06-10"))
             .body("url", CoreMatchers.equalTo("https://www.youtube.com/watch?v=wp7qctyVU2s"))
-            .body("courseId", CoreMatchers.equalTo(1))
+            .body("cursoId", CoreMatchers.equalTo(1))
     }
 
     @Test
     fun `should delete video, return status no content`(){
         val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
         val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
         val videoId = videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
         RestAssured
             .given()
