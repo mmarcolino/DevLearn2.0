@@ -6,15 +6,14 @@ import br.com.devLearn.application.repository.UserRepository
 import org.springframework.stereotype.Service
 
 @Service
-class UserService(private val repository: UserRepository,
-                  private  val NOT_FOUND_MESSAGE: String = "Usuario não econtrado") {
+class UserService(private val repository: UserRepository) {
 
     fun listUsers(): List<User> {
         return repository.findAll()
     }
 
     fun getUserById(id: Long): User {
-        return repository.findById(id).orElseThrow {NotFoundException(NOT_FOUND_MESSAGE)}
+        return repository.findById(id).orElseThrow {NotFoundException("Usuario não econtrado")}
     }
 
 

@@ -16,6 +16,7 @@ class UserServiceTest {
     private val userService = UserService(userRepository)
     private val mockedUser = User(Random.nextLong(0, Long.MAX_VALUE), "mmarcolino", "12345678", "matheus")
     private val userId = this.mockedUser.id
+
     @Test
     fun `it should return all registred users`(){
         //given
@@ -26,7 +27,7 @@ class UserServiceTest {
         verify (exactly = 1){ userRepository.findAll() }
     }
     @Test
-    fun `it should return registred user by id`(){
+    fun `it should return the registred user by id`(){
         //given
         every { userRepository.findById(userId!!) } returns Optional.of(mockedUser)
         //when
@@ -39,7 +40,7 @@ class UserServiceTest {
         verify(exactly = 1) { userRepository.findById(userId) }
     }
     @Test
-    fun `it should store and return a user from database`(){
+    fun `it should store and return a user from the database`(){
         //given
         val newUser = User(
             id = mockedUser.id,
@@ -58,7 +59,7 @@ class UserServiceTest {
         verify(exactly = 1) { userRepository.save(any()) }
     }
     @Test
-    fun `it should delete a user from database`(){
+    fun `it should delete a user from the database`(){
         //given
         every { userRepository.deleteById(userId!!) } just Runs
 

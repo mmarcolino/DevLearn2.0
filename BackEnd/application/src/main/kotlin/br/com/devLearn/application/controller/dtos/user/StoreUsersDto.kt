@@ -3,12 +3,12 @@ package br.com.devLearn.application.controller.dtos.user
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
 
-data class UserStoreDto (
+data class StoreUsersDto (
     @field:NotEmpty
     @field:Size(min = 2, max = 15)
     var username: String,
     @field:NotEmpty
-    @field:Size(min = 8, max = 16)
+    @field:Size(min = 8)
     var password: String,
     @field:NotEmpty
     var name: String,

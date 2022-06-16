@@ -26,6 +26,7 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	//implementation("org.flywaydb:flyway-core:8.5.10")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	testImplementation("com.h2database:h2:2.1.210")
 	testImplementation("org.springframework.boot:spring-boot-starter-test"){

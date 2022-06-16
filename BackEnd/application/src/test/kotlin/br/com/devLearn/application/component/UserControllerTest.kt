@@ -38,12 +38,12 @@ class UserControllerTest {
     }
 
     @Test
-    fun `should list users then, return ok status and response body`(){
+    fun `should list users, then return ok status and response body`(){
         userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
         RestAssured
             .given()
             .contentType(ContentType.JSON)
-            .get("/user")
+            .get("/users")
             .then()
             .statusCode(HttpStatus.OK.value())
             .body("[0].id", CoreMatchers.notNullValue())
@@ -57,7 +57,7 @@ class UserControllerTest {
         RestAssured
             .given()
             .contentType(ContentType.JSON)
-            .get("/user/$userId")
+            .get("/users/$userId")
             .then()
             .statusCode(HttpStatus.OK.value())
             .body("id", CoreMatchers.notNullValue())
@@ -72,7 +72,7 @@ class UserControllerTest {
             .given()
             .contentType(ContentType.JSON)
             .body(userJson)
-            .post("/user")
+            .post("/users")
             .then()
             .statusCode(HttpStatus.CREATED.value())
             .body("id", CoreMatchers.notNullValue())
@@ -88,7 +88,7 @@ class UserControllerTest {
             .given()
             .contentType(ContentType.JSON)
             .body(userJson)
-            .put("/user/$userId")
+            .put("/users/$userId")
             .then()
             .statusCode(HttpStatus.OK.value())
             .body("id", CoreMatchers.notNullValue())

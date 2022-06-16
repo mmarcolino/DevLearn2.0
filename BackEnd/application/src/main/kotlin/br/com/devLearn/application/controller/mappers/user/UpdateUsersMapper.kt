@@ -6,7 +6,7 @@ import br.com.devLearn.application.model.User
 import org.springframework.stereotype.Component
 
 @Component
-class UpdateUserMapper: UpdateMapper<UpdateUserDto, User> {
+class UpdateUsersMapper: UpdateMapper<UpdateUserDto, User> {
     override fun map(dto: UpdateUserDto, user: User):User {
         if (!dto.username.isNullOrBlank()){
             user.username = dto.username!!

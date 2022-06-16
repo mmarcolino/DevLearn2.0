@@ -1,6 +1,6 @@
 package br.com.devLearn.application.controller.dtos.user
 
-data class UserViewDto (
+data class UsersViewDto (
     var id: Long,
     var username: String,
     var password: String,

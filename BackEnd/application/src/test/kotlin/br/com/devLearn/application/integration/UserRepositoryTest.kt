@@ -20,7 +20,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    fun `return all drivers after finding them`(){
+    fun `return all users after finding them`(){
         userRepository.deleteAll()
 
         //given
