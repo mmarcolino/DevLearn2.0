@@ -2,7 +2,7 @@ package br.com.devLearn.application.controller
 
 import br.com.devLearn.application.controller.dtos.courses.*
 import br.com.devLearn.application.controller.mappers.courses.*
-import br.com.devLearn.application.service.CoursesService
+import br.com.devLearn.application.service.CourseService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,7 +12,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/courses")
 class CoursesController(
-    private val service: CoursesService,
+    private val service: CourseService,
     private val updateMapper: UpdateCoursesMapper,
     private val viewMapper: CoursesViewMapper,
     private val viewListMapper: CoursesViewListMapper,
@@ -21,7 +21,7 @@ class CoursesController(
 
     @GetMapping
     fun listCourses(@RequestParam(required = false) categorieName: String?): List<CoursesViewDto>{
-        return viewListMapper.map(service.listCourse(categorieName))
+        return viewListMapper.map(service.listCourses(categorieName))
     }
 
     @GetMapping("{id}")

@@ -2,7 +2,7 @@ package br.com.devLearn.application.controller
 
 import br.com.devLearn.application.controller.dtos.videos.*
 import br.com.devLearn.application.controller.mappers.videos.*
-import br.com.devLearn.application.service.VideosService
+import br.com.devLearn.application.service.VideoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -12,7 +12,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/videos")
 class VideosController(
-    private val service: VideosService,
+    private val service: VideoService,
     private val updateMapper: UpdateVideosMapper,
     private val viewMapper: VideosViewMapper,
     private val viewListMapper: VideosViewListMapper,
@@ -26,7 +26,7 @@ class VideosController(
 
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): VideosViewDto {
-        return viewMapper.map(service.getVideosById(id))
+        return viewMapper.map(service.getVideoById(id))
     }
 
     @PostMapping
@@ -40,7 +40,7 @@ class VideosController(
     @PutMapping("{id}")
     fun updateVideo(@PathVariable id: Long,
                     @RequestBody @Valid videos: UpdateVideoDto): ResponseEntity<VideosViewDto>{
-        val videoView = viewMapper.map(service.storeVideo(updateMapper.map(videos, service.getVideosById(id))))
+        val videoView = viewMapper.map(service.storeVideo(updateMapper.map(videos, service.getVideoById(id))))
         return ResponseEntity.ok(videoView)
     }
 

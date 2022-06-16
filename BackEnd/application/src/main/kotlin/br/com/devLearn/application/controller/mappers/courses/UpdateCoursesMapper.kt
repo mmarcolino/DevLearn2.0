@@ -2,13 +2,13 @@ package br.com.devLearn.application.controller.mappers.courses
 
 import br.com.devLearn.application.controller.dtos.courses.UpdateCoursesDto
 import br.com.devLearn.application.controller.mappers.UpdateMapper
-import br.com.devLearn.application.model.Courses
-import br.com.devLearn.application.service.CategoriesService
+import br.com.devLearn.application.model.Course
+import br.com.devLearn.application.service.CategoryService
 import org.springframework.stereotype.Component
 
 @Component
-class UpdateCoursesMapper(private val categoriesService: CategoriesService): UpdateMapper<UpdateCoursesDto, Courses> {
-    override fun map(dto: UpdateCoursesDto, course: Courses): Courses {
+class UpdateCoursesMapper(private val categoryService: CategoryService): UpdateMapper<UpdateCoursesDto, Course> {
+    override fun map(dto: UpdateCoursesDto, course: Course): Course {
 
         if(!dto.name.isNullOrBlank()){
             course.name = dto.name!!
@@ -17,7 +17,7 @@ class UpdateCoursesMapper(private val categoriesService: CategoriesService): Upd
             course.description == dto.description
         }
         if(dto.categoryId != null){
-            course.categories = categoriesService.getCategoryById(dto.categoryId!!)
+            course.category = categoryService.getCategoryById(dto.categoryId!!)
         }
         return course
     }

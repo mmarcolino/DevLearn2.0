@@ -1,16 +1,17 @@
 package br.com.devLearn.application.model
 
+import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
-data class Courses(
+data class Video (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
     var name: String,
     val description: String,
+    var date: LocalDate,
+    var url: String,
     @ManyToOne
-    val author: Users,
-    @ManyToOne
-    var categories: Categories,
+    val curso: Course,
 )

@@ -2,7 +2,7 @@ package br.com.devLearn.application.controller
 
 import br.com.devLearn.application.controller.dtos.user.*
 import br.com.devLearn.application.controller.mappers.user.*
-import br.com.devLearn.application.service.UsersService
+import br.com.devLearn.application.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -11,7 +11,7 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/users")
-class UsersController(private val service: UsersService,
+class UsersController(private val service: UserService,
                       private val updateMapper: UpdateUsersMapper,
                       private val viewMapper: UsersViewMapper,
                       private val viewListMapper: UsersViewListMapper,

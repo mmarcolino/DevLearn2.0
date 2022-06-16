@@ -1,7 +1,7 @@
 package br.com.devLearn.application.component
 
-import br.com.devLearn.application.model.Users
-import br.com.devLearn.application.repository.UsersRepository
+import br.com.devLearn.application.model.User
+import br.com.devLearn.application.repository.UserRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers
@@ -19,12 +19,12 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-class UsersControllerTest {
+class UserControllerTest {
    @LocalServerPort //descobre a porta aleatória
     private var port: Int = 0
 
     @Autowired
-    private lateinit var usersRepository: UsersRepository
+    private lateinit var userRepository: UserRepository
 
     @BeforeEach
     fun setUp(){
@@ -34,12 +34,12 @@ class UsersControllerTest {
 
     @AfterEach
     fun tearDown(){
-        usersRepository.deleteAll()
+        userRepository.deleteAll()
     }
 
     @Test
     fun `should list users, then return ok status and response body`(){
-        usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
+        userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -53,11 +53,11 @@ class UsersControllerTest {
     }
     @Test
     fun `should get user by id, then return ok status and response body`(){
-        val usersId = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma")).id
+        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma")).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
-            .get("/users/$usersId")
+            .get("/users/$userId")
             .then()
             .statusCode(HttpStatus.OK.value())
             .body("id", CoreMatchers.notNullValue())
@@ -82,13 +82,13 @@ class UsersControllerTest {
     }
     @Test
     fun `Should update user, then return ok status and response body`(){
-        val usersId = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma")).id
+        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma")).id
         val userJson = """{"username":"mmarcolino"}"""
         RestAssured
             .given()
             .contentType(ContentType.JSON)
             .body(userJson)
-            .put("/users/$usersId")
+            .put("/users/$userId")
             .then()
             .statusCode(HttpStatus.OK.value())
             .body("id", CoreMatchers.notNullValue())
@@ -98,11 +98,11 @@ class UsersControllerTest {
     }
     @Test
     fun `Should delete user, return status no content`(){
-        val usersId = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma")).id
+        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma")).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
-            .delete("/user/$usersId")
+            .delete("/user/$userId")
             .then()
             .statusCode(HttpStatus.NO_CONTENT.value())
     }

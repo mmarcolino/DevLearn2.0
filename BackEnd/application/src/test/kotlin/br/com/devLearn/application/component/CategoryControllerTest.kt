@@ -1,7 +1,7 @@
 package br.com.devLearn.application.component
 
-import br.com.devLearn.application.model.Categories
-import br.com.devLearn.application.repository.CategoriesRepository
+import br.com.devLearn.application.model.Category
+import br.com.devLearn.application.repository.CategoryRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers
@@ -14,17 +14,16 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.ActiveProfiles
-import kotlin.random.Random
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-class CategoriesControllerTest {
+class CategoryControllerTest {
     @LocalServerPort
     private val port: Int = 0
 
     @Autowired
-    private lateinit var categoriesRepository: CategoriesRepository
+    private lateinit var categoryRepository: CategoryRepository
 
     @BeforeEach
     fun setUp(){
@@ -33,12 +32,12 @@ class CategoriesControllerTest {
     }
     @AfterEach
     fun tearDown(){
-        categoriesRepository.deleteAll()
+        categoryRepository.deleteAll()
     }
 
     @Test
     fun `should list categories, then return ok status and response body`(){
-        categoriesRepository.save(Categories(1, "Backend"))
+        categoryRepository.save(Category(1, "Backend"))
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -52,7 +51,7 @@ class CategoriesControllerTest {
 
     @Test
     fun `should get categorie by id, then return ok status and response body`(){
-        val categoryId = categoriesRepository.save(Categories(1, "Backend")).id
+        val categoryId = categoryRepository.save(Category(1, "Backend")).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -79,7 +78,7 @@ class CategoriesControllerTest {
 
     @Test
     fun `Should update category, then return ok status and response body`(){
-        val categoryId = categoriesRepository.save(Categories(1, "Backend")).id
+        val categoryId = categoryRepository.save(Category(1, "Backend")).id
         val categoryJson = """{"name": "Backend"}"""
         RestAssured
             .given()
@@ -93,7 +92,7 @@ class CategoriesControllerTest {
     }
     @Test
     fun `Should delete category, return status no content`(){
-        val categoryId = categoriesRepository.save(Categories(1, "Backend")).id
+        val categoryId = categoryRepository.save(Category(1, "Backend")).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)

@@ -1,14 +1,13 @@
 package br.com.devLearn.application.service
 
 import br.com.devLearn.application.excpetion.NotFoundException
-import br.com.devLearn.application.model.Videos
-import br.com.devLearn.application.repository.VideosRepository
+import br.com.devLearn.application.model.Video
+import br.com.devLearn.application.repository.VideoRepository
 import org.springframework.stereotype.Service
 
 @Service
-class VideosService (private val repository: VideosRepository,
-                     private val NOT_FOUND_MESSAGE: String = "Video não encontrado"){
-    fun listVideos(courseName: String?): List <Videos>{
+class VideoService (private val repository: VideoRepository){
+    fun listVideos(courseName: String?): List <Video>{
         val videos = if(courseName.isNullOrBlank())
             repository.findAll()
         else
@@ -16,11 +15,11 @@ class VideosService (private val repository: VideosRepository,
         return repository.findAll()
     }
 
-    fun getVideosById(id: Long): Videos{
-        return repository.findById(id).orElseThrow { NotFoundException(NOT_FOUND_MESSAGE) }
+    fun getVideoById(id: Long): Video{
+        return repository.findById(id).orElseThrow { NotFoundException("Video não encontrado") }
     }
 
-    fun storeVideo(video: Videos): Videos{
+    fun storeVideo(video: Video): Video{
         repository.save(video)
         return video
     }

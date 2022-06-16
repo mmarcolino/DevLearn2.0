@@ -2,17 +2,17 @@ package br.com.devLearn.application.controller.mappers.user
 
 import br.com.devLearn.application.controller.dtos.user.UsersViewDto
 import br.com.devLearn.application.controller.mappers.DefaultMapper
-import br.com.devLearn.application.model.Users
+import br.com.devLearn.application.model.User
 import org.springframework.stereotype.Component
 
 @Component
-class UsersViewMapper: DefaultMapper<Users, UsersViewDto> {
-    override fun map(users: Users): UsersViewDto {
+class UsersViewMapper: DefaultMapper<User, UsersViewDto> {
+    override fun map(user: User): UsersViewDto {
         return UsersViewDto(
-            id = users.id!!,
-            username = users.username,
-            password = users.password,
-            name = users.name
+            id = user.id!!,
+            username = user.username,
+            password = user.password,
+            name = user.name
         )
     }
 }

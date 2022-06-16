@@ -1,7 +1,7 @@
 package br.com.devLearn.application.integration
 
-import br.com.devLearn.application.model.Categories
-import br.com.devLearn.application.repository.CategoriesRepository
+import br.com.devLearn.application.model.Category
+import br.com.devLearn.application.repository.CategoryRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -9,24 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 @DataJpaTest
-class CategoriesRepositoryTest {
+class CategoryRepositoryTest {
     @Autowired
-    private lateinit var categoriesRepository: CategoriesRepository
+    private lateinit var categoryRepository: CategoryRepository
 
     @AfterEach
     fun tearDown(){
-        categoriesRepository.deleteAll()
+        categoryRepository.deleteAll()
     }
 
     @Test
     fun `should return all categorys after finding them`(){
 
         //given
-        categoriesRepository.save(Categories(null, "Backend"))
-        categoriesRepository.save(Categories(null, "Frontend"))
+        categoryRepository.save(Category(null, "Backend"))
+        categoryRepository.save(Category(null, "Frontend"))
 
         //when
-        val result = categoriesRepository.findAll()
+        val result = categoryRepository.findAll()
 
         //then
         Assertions.assertEquals(2, result.size)
@@ -35,10 +35,10 @@ class CategoriesRepositoryTest {
     @Test
     fun `should return category after finding it by id`(){
         //given
-        val subject = Categories(null, "Backend")
-        val id = categoriesRepository.save(subject).id ?: throw java.lang.RuntimeException("Category id is null")
+        val subject = Category(null, "Backend")
+        val id = categoryRepository.save(subject).id ?: throw java.lang.RuntimeException("Category id is null")
         //when
-        val result = categoriesRepository.getById(id)
+        val result = categoryRepository.getById(id)
         //then
         Assertions.assertEquals(subject.id, result.id)
         Assertions.assertEquals(subject.name, result.name)
@@ -47,20 +47,20 @@ class CategoriesRepositoryTest {
     @Test
     fun `verify if category is truly deleted`(){
         //given
-        val subject = Categories(null, "Backend")
-        val id = categoriesRepository.save(subject).id ?: throw java.lang.RuntimeException("Category id is null")
+        val subject = Category(null, "Backend")
+        val id = categoryRepository.save(subject).id ?: throw java.lang.RuntimeException("Category id is null")
         //when
-        categoriesRepository.deleteById(id)
+        categoryRepository.deleteById(id)
         //then
-        Assertions.assertFalse(categoriesRepository.existsById(id))
+        Assertions.assertFalse(categoryRepository.existsById(id))
     }
 
     @Test
     fun `verify if it return the caregory after saving it`(){
         //given
-        val subject = Categories(null, "Backend")
+        val subject = Category(null, "Backend")
         //when
-        val result = categoriesRepository.save(subject)
+        val result = categoryRepository.save(subject)
         //then
         Assertions.assertEquals(subject.id, result.id)
         Assertions.assertEquals(subject.name, result.name)

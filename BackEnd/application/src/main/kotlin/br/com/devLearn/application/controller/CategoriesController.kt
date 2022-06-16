@@ -7,7 +7,7 @@ import br.com.devLearn.application.controller.mappers.category.StoreCategoriesMa
 import br.com.devLearn.application.controller.mappers.category.CategoriesViewListMapper
 import br.com.devLearn.application.controller.mappers.category.CategoriesViewMapper
 import br.com.devLearn.application.controller.mappers.category.UpdateCategoriesMapper
-import br.com.devLearn.application.service.CategoriesService
+import br.com.devLearn.application.service.CategoryService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -25,7 +25,7 @@ import javax.validation.Valid
 @RestController
 @RequestMapping("/categories")
 class CategoriesController(
-    private val service: CategoriesService,
+    private val service: CategoryService,
     private val updateMapper: UpdateCategoriesMapper,
     private val viewMapper: CategoriesViewMapper,
     private val viewListMapper: CategoriesViewListMapper,

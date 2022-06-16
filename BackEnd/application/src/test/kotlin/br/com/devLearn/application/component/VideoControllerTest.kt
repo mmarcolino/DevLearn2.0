@@ -1,13 +1,13 @@
 package br.com.devLearn.application.component
 
-import br.com.devLearn.application.model.Categories
-import br.com.devLearn.application.model.Courses
-import br.com.devLearn.application.model.Users
-import br.com.devLearn.application.model.Videos
-import br.com.devLearn.application.repository.CategoriesRepository
-import br.com.devLearn.application.repository.CoursesRepository
-import br.com.devLearn.application.repository.UsersRepository
-import br.com.devLearn.application.repository.VideosRepository
+import br.com.devLearn.application.model.Category
+import br.com.devLearn.application.model.Course
+import br.com.devLearn.application.model.User
+import br.com.devLearn.application.model.Video
+import br.com.devLearn.application.repository.CategoryRepository
+import br.com.devLearn.application.repository.CourseRepository
+import br.com.devLearn.application.repository.UserRepository
+import br.com.devLearn.application.repository.VideoRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers
@@ -20,24 +20,23 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
 import org.springframework.test.context.ActiveProfiles
-import java.sql.Date
 import java.time.LocalDate
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
 @ActiveProfiles("test")
-class VideosControllerTest {
+class VideoControllerTest {
     @LocalServerPort
     private val port: Int = 0
 
     @Autowired
-    private lateinit var videosRepository: VideosRepository
+    private lateinit var videoRepository: VideoRepository
     @Autowired
-    private lateinit var usersRepository: UsersRepository
+    private lateinit var userRepository: UserRepository
     @Autowired
-    private lateinit var categoriesRepository: CategoriesRepository
+    private lateinit var categoryRepository: CategoryRepository
     @Autowired
-    private lateinit var coursesRepository: CoursesRepository
+    private lateinit var courseRepository: CourseRepository
 
     @BeforeEach
     fun setUp(){
@@ -47,15 +46,15 @@ class VideosControllerTest {
 
     @AfterEach
     fun tearDown(){
-        videosRepository.deleteAll()
+        videoRepository.deleteAll()
     }
 
     @Test
     fun `should list videos, then return ok status and response body`(){
-        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
-        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
-        videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
+        val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
+        videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -72,10 +71,10 @@ class VideosControllerTest {
 
     @Test
     fun `Should get video by id, then return ok status and response body`(){
-        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
-        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
-        val videoId = videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
+        val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
+        val videoId = videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -92,9 +91,9 @@ class VideosControllerTest {
 
     @Test
     fun `Should create a video, then return a create status and response body`(){
-        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
-        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
+        courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val videoJson = """{"name": "Introdução", "description": "Introdução sobre Spring Boot","date": "2022-06-10", "url": "https://www.youtube.com/watch?v=j5Tt8bmeCBA", "cursoId": "1"}"""
         RestAssured
             .given()
@@ -113,10 +112,10 @@ class VideosControllerTest {
 
     @Test
     fun `should update a video, then return ok status and response body`(){
-        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
-        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
-        val videoId = videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
+        val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
+        val videoId = videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
         val videoJson = """{"url": "https://www.youtube.com/watch?v=wp7qctyVU2s"}"""
         RestAssured
             .given()
@@ -135,10 +134,10 @@ class VideosControllerTest {
 
     @Test
     fun `should delete video, return status no content`(){
-        val authorEntity = usersRepository.save(Users(1, "Kenma123", "12345678", "Kenma"))
-        val categoriesEntity = categoriesRepository.save(Categories(1, "Backend"))
-        val courseEntity = coursesRepository.save(Courses(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoriesEntity))
-        val videoId = videosRepository.save(Videos(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val categoryEntity = categoryRepository.save(Category(1, "Backend"))
+        val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
+        val videoId = videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
