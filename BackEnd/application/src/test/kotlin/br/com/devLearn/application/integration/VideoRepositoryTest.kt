@@ -38,12 +38,24 @@ class VideoRepositoryTest {
         val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
-        videoRepository.save(Video(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
-        videoRepository.save(Video(null, "Primeiros passos", "Configurando o spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
+        val subject = videoRepository.save(Video(0, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
+        val subject2 = videoRepository.save(Video(1, "Primeiros passos", "Configurando o spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
         //when
         val result = videoRepository.findAll()
         //then
         Assertions.assertEquals(2, result.size)
+        Assertions.assertEquals(subject.id, result[0].id)
+        Assertions.assertEquals(subject.name, result[0].name)
+        Assertions.assertEquals(subject.course, result[0].course)
+        Assertions.assertEquals(subject.url, result[0].url)
+        Assertions.assertEquals(subject.date, result[0].date)
+        Assertions.assertEquals(subject.description, result[0].description)
+        Assertions.assertEquals(subject2.id, result[1].id)
+        Assertions.assertEquals(subject2.name, result[1].name)
+        Assertions.assertEquals(subject2.course, result[1].course)
+        Assertions.assertEquals(subject2.url, result[1].url)
+        Assertions.assertEquals(subject2.date, result[1].date)
+        Assertions.assertEquals(subject2.description, result[1].description)
     }
 
     @Test
@@ -62,7 +74,7 @@ class VideoRepositoryTest {
         Assertions.assertEquals(subject.description, result.description)
         Assertions.assertEquals(subject.date, result.date)
         Assertions.assertEquals(subject.url, result.url)
-        Assertions.assertEquals(subject.curso, result.curso)
+        Assertions.assertEquals(subject.course, result.course)
     }
 
     @Test
@@ -94,6 +106,6 @@ class VideoRepositoryTest {
         Assertions.assertEquals(subject.description, result.description)
         Assertions.assertEquals(subject.date, result.date)
         Assertions.assertEquals(subject.url, result.url)
-        Assertions.assertEquals(subject.curso, result.curso)
+        Assertions.assertEquals(subject.course, result.course)
     }
 }

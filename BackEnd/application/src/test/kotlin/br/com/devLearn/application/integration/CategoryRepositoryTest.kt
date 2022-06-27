@@ -22,14 +22,18 @@ class CategoryRepositoryTest {
     fun `should return all categorys after finding them`(){
 
         //given
-        categoryRepository.save(Category(null, "Backend"))
-        categoryRepository.save(Category(null, "Frontend"))
+        val subject = categoryRepository.save(Category(null, "Backend"))
+        val subject2 = categoryRepository.save(Category(null, "Frontend"))
 
         //when
         val result = categoryRepository.findAll()
 
         //then
         Assertions.assertEquals(2, result.size)
+        Assertions.assertEquals(subject.id, result[0].id)
+        Assertions.assertEquals(subject.name, result[0].name)
+        Assertions.assertEquals(subject2.id, result[1].id)
+        Assertions.assertEquals(subject2.name, result[1].name)
     }
 
     @Test

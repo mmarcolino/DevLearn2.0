@@ -24,14 +24,22 @@ class UserRepositoryTest {
         userRepository.deleteAll()
 
         //given
-        userRepository.save(User(null, "Kenma123", "12345678", "Kenma"))
-        userRepository.save(User(null, "Johan123", "12345678", "Johan"))
+        val subject = userRepository.save(User(null, "Kenma123", "12345678", "Kenma"))
+        val subject2 = userRepository.save(User(null, "Johan123", "12345678", "Johan"))
 
         //when
         val result = userRepository.findAll()
 
         //then
         Assertions.assertEquals(2, result.size)
+        Assertions.assertEquals(subject.id, result[0].id)
+        Assertions.assertEquals(subject.username, result[0].username)
+        Assertions.assertEquals(subject.password, result[0].password)
+        Assertions.assertEquals(subject.name, result[0].name)
+        Assertions.assertEquals(subject2.id, result[1].id)
+        Assertions.assertEquals(subject2.username, result[1].username)
+        Assertions.assertEquals(subject2.password, result[1].password)
+        Assertions.assertEquals(subject2.name, result[1].name)
     }
 
     @Test

@@ -4,5 +4,5 @@ import br.com.devLearn.application.model.Course
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface CourseRepository:JpaRepository<Course, Long> {
-    fun findByCategoriesName(categorieName: String): List<Course>
+    fun findByCategoryName(categorieName: String): List<Course>
 }

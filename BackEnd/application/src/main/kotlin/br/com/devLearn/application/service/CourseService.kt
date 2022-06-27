@@ -12,7 +12,7 @@ class CourseService(private val repository: CourseRepository) {
         val courses: List<Course> = if (categorieName.isNullOrBlank())
             repository.findAll()
         else
-            repository.findByCategoriesName(categorieName)
+            repository.findByCategoryName(categorieName)
         return courses
     }
 
