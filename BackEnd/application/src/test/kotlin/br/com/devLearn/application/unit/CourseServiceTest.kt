@@ -18,27 +18,50 @@ class CourseServiceTest {
     private val authorEntity = User(1, "Kenma123", "12345678", "Kenma")
     private val categoryEntity = Category(1, "Backend")
     private val mockedCourse = Course(Random.nextLong(0, Long.MAX_VALUE), "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity)
+    private val mockedCourse2 = Course(Random.nextLong(0, Long.MAX_VALUE), "POO", "Curso de POO", authorEntity, categoryEntity)
     private val coursesId = this.mockedCourse.id
 
     @Test
     fun `it should return all registred Courses`(){
         //given
-        every { courseRepository.findAll() } returns emptyList()
+        val lista: List<Course> = listOf(mockedCourse, mockedCourse2)
+        every { courseRepository.findAll() } returns lista
         //when
         val result = courseService.listCourses("")
         //then
         verify (exactly = 1){ courseRepository.findAll() }
+        Assertions.assertEquals(lista[0].id, result[0].id)
+        Assertions.assertEquals(lista[0].name, result[0].name)
+        Assertions.assertEquals(lista[0].description, result[0].description)
+        Assertions.assertEquals(lista[0].author, result[0].author)
+        Assertions.assertEquals(lista[0].category, result[0].category)
+        Assertions.assertEquals(lista[1].id, result[1].id)
+        Assertions.assertEquals(lista[1].name, result[1].name)
+        Assertions.assertEquals(lista[1].description, result[1].description)
+        Assertions.assertEquals(lista[1].author, result[1].author)
+        Assertions.assertEquals(lista[1].category, result[1].category)
     }
 
     @Test
     fun `it should return all registred Courses with categorie equal to x`(){
         //given
-        val categorieName = "teste"
-        every { courseRepository.findByCategoriesName(categorieName) } returns emptyList()
+        val lista: List<Course> = listOf(mockedCourse, mockedCourse2)
+        val categorieName = "Backend"
+        every { courseRepository.findByCategoryName(categorieName) } returns lista
         //when
         val result = courseService.listCourses(categorieName)
         //then
-        verify (exactly = 1){ courseRepository.findByCategoriesName(categorieName) }
+        verify (exactly = 1){ courseRepository.findByCategoryName(categorieName) }
+        Assertions.assertEquals(lista[0].id, result[0].id)
+        Assertions.assertEquals(lista[0].name, result[0].name)
+        Assertions.assertEquals(lista[0].description, result[0].description)
+        Assertions.assertEquals(lista[0].author, result[0].author)
+        Assertions.assertEquals(lista[0].category, result[0].category)
+        Assertions.assertEquals(lista[1].id, result[1].id)
+        Assertions.assertEquals(lista[1].name, result[1].name)
+        Assertions.assertEquals(lista[1].description, result[1].description)
+        Assertions.assertEquals(lista[1].author, result[1].author)
+        Assertions.assertEquals(lista[1].category, result[1].category)
     }
 
     @Test
@@ -48,6 +71,7 @@ class CourseServiceTest {
         //when
         val result = courseService.getCourseById(coursesId!!)
         //then
+        verify(exactly = 1){courseRepository.findById(coursesId!!)}
         Assertions.assertEquals(mockedCourse.id, result.id)
         Assertions.assertEquals(mockedCourse.name, result.name)
         Assertions.assertEquals(mockedCourse.description, result.description)

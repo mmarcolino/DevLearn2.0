@@ -11,7 +11,7 @@ class VideoService (private val repository: VideoRepository){
         val videos = if(courseName.isNullOrBlank())
             repository.findAll()
         else
-            repository.findByCoursesName(courseName)
+            repository.findByCourseName(courseName)
         return repository.findAll()
     }
 

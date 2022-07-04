@@ -13,5 +13,5 @@ data class Video (
     var date: LocalDate,
     var url: String,
     @ManyToOne
-    val curso: Course,
+    val course: Course,
 )

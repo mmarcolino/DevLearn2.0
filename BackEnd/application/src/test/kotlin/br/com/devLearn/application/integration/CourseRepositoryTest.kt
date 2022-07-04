@@ -31,12 +31,22 @@ class CourseRepositoryTest {
         //given
         val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
-        courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
-        courseRepository.save(Course(null, "Kotlin", "Curso de POO em Kotlin", authorEntity, categoryEntity))
+        val subject = courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
+        val subject2 = courseRepository.save(Course(null, "Kotlin", "Curso de POO em Kotlin", authorEntity, categoryEntity))
         //when
         val result = courseRepository.findAll()
         //then
         Assertions.assertEquals(2, result.size)
+        Assertions.assertEquals(subject.id, result[0].id)
+        Assertions.assertEquals(subject.name, result[0].name)
+        Assertions.assertEquals(subject.description, result[0].description)
+        Assertions.assertEquals(subject.author, result[0].author)
+        Assertions.assertEquals(subject.category, result[0].category)
+        Assertions.assertEquals(subject2.id, result[1].id)
+        Assertions.assertEquals(subject2.name, result[1].name)
+        Assertions.assertEquals(subject2.description, result[1].description)
+        Assertions.assertEquals(subject2.author, result[1].author)
+        Assertions.assertEquals(subject2.category, result[1].category)
     }
 
     @Test

@@ -15,16 +15,26 @@ class UserServiceTest {
     private val userRepository: UserRepository = mockk(relaxed = true)
     private val userService = UserService(userRepository)
     private val mockedUser = User(Random.nextLong(0, Long.MAX_VALUE), "mmarcolino", "12345678", "matheus")
+    private val mockedUser2 = User(Random.nextLong(0, Long.MAX_VALUE), "kenma", "123456789", "kenzo")
     private val userId = this.mockedUser.id
 
     @Test
     fun `it should return all registred users`(){
         //given
-        every { userRepository.findAll() } returns emptyList()
+        val lista: List<User> = listOf(mockedUser, mockedUser2)
+        every { userRepository.findAll() } returns lista
         //when
         val result = userService.listUsers()
         //then
         verify (exactly = 1){ userRepository.findAll() }
+        Assertions.assertEquals(lista[0].id, result[0].id)
+        Assertions.assertEquals(lista[0].username, result[0].username)
+        Assertions.assertEquals(lista[0].password, result[0].password)
+        Assertions.assertEquals(lista[0].name, result[0].name)
+        Assertions.assertEquals(lista[1].id, result[1].id)
+        Assertions.assertEquals(lista[1].username, result[1].username)
+        Assertions.assertEquals(lista[1].password, result[1].password)
+        Assertions.assertEquals(lista[1].name, result[1].name)
     }
     @Test
     fun `it should return the registred user by id`(){
