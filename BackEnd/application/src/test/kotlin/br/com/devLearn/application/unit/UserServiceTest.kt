@@ -1,5 +1,6 @@
 package br.com.devLearn.application.unit
 
+import br.com.devLearn.application.model.Role
 import br.com.devLearn.application.model.User
 import br.com.devLearn.application.repository.UserRepository
 import br.com.devLearn.application.service.UserService
@@ -14,8 +15,9 @@ class UserServiceTest {
 
     private val userRepository: UserRepository = mockk(relaxed = true)
     private val userService = UserService(userRepository)
-    private val mockedUser = User(Random.nextLong(0, Long.MAX_VALUE), "mmarcolino", "12345678", "matheus")
-    private val mockedUser2 = User(Random.nextLong(0, Long.MAX_VALUE), "kenma", "123456789", "kenzo")
+    private val role = listOf(Role(1, "ADMIN"))
+    private val mockedUser = User(Random.nextLong(0, Long.MAX_VALUE), "mmarcolino", "12345678", "matheus", role)
+    private val mockedUser2 = User(Random.nextLong(0, Long.MAX_VALUE), "kenma", "123456789", "kenzo", role)
     private val userId = this.mockedUser.id
 
     @Test
@@ -56,7 +58,8 @@ class UserServiceTest {
             id = mockedUser.id,
             username = mockedUser.username,
             password = mockedUser.password,
-            name = mockedUser.name
+            name = mockedUser.name,
+            roles = mockedUser.roles
         )
         every { userRepository.save(any()) } returns mockedUser
         //when

@@ -27,11 +27,6 @@ class UserController(private val service: UserService,
         return viewMapper.map(service.getUserById(id))
     }
 
-    fun findByUsername(@RequestParam username: String): UserViewDto{
-        return viewMapper.map(service.getByUsername(username))
-    }
-
-
     @PostMapping
     fun singUp(@RequestBody @Valid dto: StoreUserDto,
                uriBuilder: UriComponentsBuilder): ResponseEntity<UserViewDto>  {

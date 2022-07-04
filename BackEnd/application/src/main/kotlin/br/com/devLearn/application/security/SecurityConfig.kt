@@ -1,5 +1,6 @@
 package br.com.devLearn.application.security
 
+import br.com.devLearn.application.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -10,9 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @EnableWebSecurity
-class SecurityConfig: WebSecurityConfigurerAdapter() {
-    @Autowired
-    private lateinit var userDetailsService: UserAuthService
+class SecurityConfig(private val service: UserService): WebSecurityConfigurerAdapter() {
 
     @Bean
     fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
@@ -20,7 +19,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder())
+        auth.userDetailsService(service).passwordEncoder(bCryptPasswordEncoder())
     }
 
     @Override

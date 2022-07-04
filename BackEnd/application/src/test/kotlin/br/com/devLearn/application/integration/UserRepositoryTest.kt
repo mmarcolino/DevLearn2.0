@@ -1,6 +1,8 @@
 package br.com.devLearn.application.integration
 
+import br.com.devLearn.application.model.Role
 import br.com.devLearn.application.model.User
+import br.com.devLearn.application.repository.RoleRepository
 import br.com.devLearn.application.repository.UserRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
@@ -13,6 +15,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 class UserRepositoryTest {
     @Autowired
     private lateinit var userRepository: UserRepository
+    @Autowired
+    private lateinit var roleRepository: RoleRepository
 
     @AfterEach
     fun tearDown(){
@@ -24,8 +28,9 @@ class UserRepositoryTest {
         userRepository.deleteAll()
 
         //given
-        val subject = userRepository.save(User(null, "Kenma123", "12345678", "Kenma"))
-        val subject2 = userRepository.save(User(null, "Johan123", "12345678", "Johan"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val subject = userRepository.save(User(null, "Kenma123", "12345678", "Kenma", role))
+        val subject2 = userRepository.save(User(null, "Johan123", "12345678", "Johan", role))
 
         //when
         val result = userRepository.findAll()
@@ -45,7 +50,8 @@ class UserRepositoryTest {
     @Test
     fun `return user after finding it by id`(){
         //given
-        val user =User(null, "Kenma123", "12345678", "Kenma")
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val user =User(null, "Kenma123", "12345678", "Kenma", role)
         val userId = userRepository.save(user).id ?: throw java.lang.RuntimeException("User id is null")
         //when
         val result = userRepository.getById(userId)
@@ -59,7 +65,8 @@ class UserRepositoryTest {
     @Test
     fun `verify if user is truly deleted`(){
         //given
-        val user = User(null, "Kenma123", "12345678", "Kenma")
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val user = User(null, "Kenma123", "12345678", "Kenma", role)
         val userId = userRepository.save(user).id ?: throw java.lang.RuntimeException("User id is null")
         //when
         userRepository.deleteById(userId)
@@ -70,7 +77,8 @@ class UserRepositoryTest {
     @Test
     fun `verify if it returns the user after saving it`(){
         //given
-        val user = User(null, "Kenma123", "12345678", "Kenma")
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val user = User(null, "Kenma123", "12345678", "Kenma", role)
         //when
         val result = userRepository.save(user)
         //then

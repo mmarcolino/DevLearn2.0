@@ -2,6 +2,7 @@ package br.com.devLearn.application.unit
 
 import br.com.devLearn.application.model.Category
 import br.com.devLearn.application.model.Course
+import br.com.devLearn.application.model.Role
 import br.com.devLearn.application.model.User
 import br.com.devLearn.application.repository.CourseRepository
 import br.com.devLearn.application.service.CourseService
@@ -15,7 +16,8 @@ class CourseServiceTest {
 
     private val courseRepository: CourseRepository = mockk(relaxed = true)
     private val courseService = CourseService(courseRepository)
-    private val authorEntity = User(1, "Kenma123", "12345678", "Kenma")
+    private val role = listOf(Role(1, "ADMIN"))
+    private val authorEntity = User(1, "Kenma123", "12345678", "Kenma", role)
     private val categoryEntity = Category(1, "Backend")
     private val mockedCourse = Course(Random.nextLong(0, Long.MAX_VALUE), "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity)
     private val mockedCourse2 = Course(Random.nextLong(0, Long.MAX_VALUE), "POO", "Curso de POO", authorEntity, categoryEntity)

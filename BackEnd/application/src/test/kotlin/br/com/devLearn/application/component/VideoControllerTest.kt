@@ -1,13 +1,7 @@
 package br.com.devLearn.application.component
 
-import br.com.devLearn.application.model.Category
-import br.com.devLearn.application.model.Course
-import br.com.devLearn.application.model.User
-import br.com.devLearn.application.model.Video
-import br.com.devLearn.application.repository.CategoryRepository
-import br.com.devLearn.application.repository.CourseRepository
-import br.com.devLearn.application.repository.UserRepository
-import br.com.devLearn.application.repository.VideoRepository
+import br.com.devLearn.application.model.*
+import br.com.devLearn.application.repository.*
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import org.hamcrest.CoreMatchers
@@ -37,6 +31,9 @@ class VideoControllerTest {
     private lateinit var categoryRepository: CategoryRepository
     @Autowired
     private lateinit var courseRepository: CourseRepository
+    @Autowired
+    private lateinit var roleRepository: RoleRepository
+
 
     @BeforeEach
     fun setUp(){
@@ -51,7 +48,8 @@ class VideoControllerTest {
 
     @Test
     fun `should list videos, then return ok status and response body`(){
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
@@ -71,7 +69,8 @@ class VideoControllerTest {
 
     @Test
     fun `Should get video by id, then return ok status and response body`(){
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val videoId = videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
@@ -91,7 +90,8 @@ class VideoControllerTest {
 
     @Test
     fun `Should create a video, then return a create status and response body`(){
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val videoJson = """{"name": "Introdução", "description": "Introdução sobre Spring Boot","date": "2022-06-10", "url": "https://www.youtube.com/watch?v=j5Tt8bmeCBA", "cursoId": "1"}"""
@@ -112,7 +112,8 @@ class VideoControllerTest {
 
     @Test
     fun `should update a video, then return ok status and response body`(){
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val videoId = videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id
@@ -134,7 +135,8 @@ class VideoControllerTest {
 
     @Test
     fun `should delete video, return status no content`(){
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(1, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val videoId = videoRepository.save(Video(null, "Introdução", "Introdução sobre Spring Boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)).id

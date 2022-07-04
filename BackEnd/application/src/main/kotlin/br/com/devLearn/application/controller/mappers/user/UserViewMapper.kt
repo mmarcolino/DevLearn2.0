@@ -11,8 +11,8 @@ class UserViewMapper: DefaultMapper<User, UserViewDto> {
         return UserViewDto(
             id = user.id!!,
             username = user.username,
-            password = user.password,
-            name = user.name
+            name = user.name,
+            roles = user.roles.map { role -> role.name }
         )
     }
 }

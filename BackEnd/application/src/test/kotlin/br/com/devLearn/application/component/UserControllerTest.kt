@@ -1,6 +1,8 @@
 package br.com.devLearn.application.component
 
+import br.com.devLearn.application.model.Role
 import br.com.devLearn.application.model.User
+import br.com.devLearn.application.repository.RoleRepository
 import br.com.devLearn.application.repository.UserRepository
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
@@ -26,6 +28,9 @@ class UserControllerTest {
     @Autowired
     private lateinit var userRepository: UserRepository
 
+    @Autowired
+    private lateinit var roleRepository: RoleRepository
+
     @BeforeEach
     fun setUp(){
         RestAssured.baseURI = "http://localhost:$port/"
@@ -39,7 +44,8 @@ class UserControllerTest {
 
     @Test
     fun `should list users, then return ok status and response body`(){
-        userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -53,7 +59,8 @@ class UserControllerTest {
     }
     @Test
     fun `should get user by id, then return ok status and response body`(){
-        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma")).id
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role)).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)
@@ -82,7 +89,8 @@ class UserControllerTest {
     }
     @Test
     fun `Should update user, then return ok status and response body`(){
-        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma")).id
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role)).id
         val userJson = """{"username":"mmarcolino"}"""
         RestAssured
             .given()
@@ -98,7 +106,8 @@ class UserControllerTest {
     }
     @Test
     fun `Should delete user, return status no content`(){
-        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma")).id
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val userId = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role)).id
         RestAssured
             .given()
             .contentType(ContentType.JSON)

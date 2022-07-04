@@ -2,9 +2,11 @@ package br.com.devLearn.application.integration
 
 import br.com.devLearn.application.model.Category
 import br.com.devLearn.application.model.Course
+import br.com.devLearn.application.model.Role
 import br.com.devLearn.application.model.User
 import br.com.devLearn.application.repository.CategoryRepository
 import br.com.devLearn.application.repository.CourseRepository
+import br.com.devLearn.application.repository.RoleRepository
 import br.com.devLearn.application.repository.UserRepository
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
@@ -20,6 +22,8 @@ class CourseRepositoryTest {
     private lateinit var userRepository: UserRepository
     @Autowired
     private lateinit var categoryRepository: CategoryRepository
+    @Autowired
+    private lateinit var roleRepository: RoleRepository
 
     @AfterEach
     fun tearDown(){
@@ -29,7 +33,8 @@ class CourseRepositoryTest {
     @Test
     fun `should return all courses after finding them`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val subject = courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val subject2 = courseRepository.save(Course(null, "Kotlin", "Curso de POO em Kotlin", authorEntity, categoryEntity))
@@ -52,7 +57,8 @@ class CourseRepositoryTest {
     @Test
     fun `should return the course after finding it by id`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val subject = Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity)
         val id = courseRepository.save(subject).id ?: throw java.lang.RuntimeException("Course id is null")
@@ -69,7 +75,8 @@ class CourseRepositoryTest {
     @Test
     fun `verify if the course is truly deleted`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val subject = Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity)
         val id = courseRepository.save(subject).id ?: throw java.lang.RuntimeException("Course id is null")
@@ -82,7 +89,8 @@ class CourseRepositoryTest {
     @Test
     fun `verify if it return the course after saving it`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val subject = Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity)
         //when
