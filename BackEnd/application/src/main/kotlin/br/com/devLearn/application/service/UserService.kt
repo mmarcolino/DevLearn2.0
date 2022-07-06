@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.core.userdetails.User as UserBuilder
 import org.springframework.stereotype.Service
+import javax.transaction.Transactional
 
 @Service
 class UserService(private val userRepository: UserRepository): UserDetailsService {
@@ -42,9 +43,10 @@ class UserService(private val userRepository: UserRepository): UserDetailsServic
         userRepository.deleteById(id)
     }
 
+    @Transactional
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByUsername(username)?: throw NotFoundException("Usuario não econtrado")
-        val roles = user.roles.map { role -> GrantedAuthority { String.format("ROLE_%s_%s", role.name) } }
+        val roles = user.roles.map { role -> GrantedAuthority { String.format("ROLE_", role.name) } }
         return UserBuilder.
         withUsername(user.username).
         password(user.password).

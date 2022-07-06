@@ -33,10 +33,12 @@ class UserServiceTest {
         Assertions.assertEquals(lista[0].username, result[0].username)
         Assertions.assertEquals(lista[0].password, result[0].password)
         Assertions.assertEquals(lista[0].name, result[0].name)
+        Assertions.assertEquals(lista[0].roles, result[0].roles)
         Assertions.assertEquals(lista[1].id, result[1].id)
         Assertions.assertEquals(lista[1].username, result[1].username)
         Assertions.assertEquals(lista[1].password, result[1].password)
         Assertions.assertEquals(lista[1].name, result[1].name)
+        Assertions.assertEquals(lista[1].roles, result[1].roles)
     }
     @Test
     fun `it should return the registred user by id`(){
@@ -49,6 +51,7 @@ class UserServiceTest {
         Assertions.assertEquals(mockedUser.username, result.username)
         Assertions.assertEquals(mockedUser.password, result.password)
         Assertions.assertEquals(mockedUser.name, result.name)
+        Assertions.assertEquals(mockedUser.roles, result.roles)
         verify(exactly = 1) { userRepository.findById(userId) }
     }
     @Test
@@ -69,6 +72,7 @@ class UserServiceTest {
         Assertions.assertEquals(mockedUser.username, result.username)
         Assertions.assertEquals(mockedUser.password, result.password)
         Assertions.assertEquals(mockedUser.name, result.name)
+        Assertions.assertEquals(mockedUser.roles, result.roles)
         verify(exactly = 1) { userRepository.save(any()) }
     }
     @Test
