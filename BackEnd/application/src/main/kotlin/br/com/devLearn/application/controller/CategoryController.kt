@@ -10,6 +10,7 @@ import br.com.devLearn.application.controller.mappers.category.UpdateCategoryMap
 import br.com.devLearn.application.service.CategoryService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -32,16 +33,19 @@ class CategoryController(
     private val storeMapper: StoreCategoryMapper
 ) {
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @GetMapping
     fun listCategory(): List<CategoryViewDto>{
         return viewListMapper.map(service.listCategories())
     }
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): CategoryViewDto{
         return viewMapper.map(service.getCategoryById(id))
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     fun saveCourse(@RequestBody @Valid dto: StoreCategoryDto,
                    uriBuilder: UriComponentsBuilder):ResponseEntity<CategoryViewDto>{
@@ -50,6 +54,7 @@ class CategoryController(
         return ResponseEntity.created(uri).body(categoryView)
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("{id}")
     fun updateCategory(@PathVariable id: Long,
                        @RequestBody @Valid category: UpdateCategoryDto): ResponseEntity<CategoryViewDto>{
@@ -57,6 +62,7 @@ class CategoryController(
         return ResponseEntity.ok(categoryView)
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteCategory(@PathVariable id: Long){

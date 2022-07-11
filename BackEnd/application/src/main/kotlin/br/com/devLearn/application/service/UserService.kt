@@ -3,6 +3,7 @@ package br.com.devLearn.application.service
 import br.com.devLearn.application.excpetion.NotFoundException
 import br.com.devLearn.application.model.User
 import br.com.devLearn.application.repository.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -15,10 +16,9 @@ import javax.transaction.Transactional
 @Service
 class UserService(private val userRepository: UserRepository): UserDetailsService {
 
-    @Bean
-    private fun passwordEncoder(): BCryptPasswordEncoder{
-        return BCryptPasswordEncoder()
-    }
+    @Autowired
+    private lateinit var passwordEncoder: BCryptPasswordEncoder
+
 
     fun listUsers(): List<User> {
         return userRepository.findAll()
@@ -33,7 +33,6 @@ class UserService(private val userRepository: UserRepository): UserDetailsServic
     }
 
     fun storeUser(user: User): User{
-        val passwordEncoder = passwordEncoder()
         user.password = passwordEncoder.encode(user.password)
         userRepository.save(user)
         return user
