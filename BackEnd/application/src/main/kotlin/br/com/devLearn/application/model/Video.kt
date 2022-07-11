@@ -4,6 +4,7 @@ import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
+@Table(name = "video")
 data class Video (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

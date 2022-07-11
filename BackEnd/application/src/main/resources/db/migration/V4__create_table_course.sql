@@ -5,6 +5,6 @@ CREATE TABLE course(
   author_id bigint not null,
   category_id bigint not null,
   primary key (id),
-  foreign key (author_id) refences user(id),
+  foreign key (author_id) REFERENCES users(id),
   foreign key (category_id) REFERENCES category(id)
 );

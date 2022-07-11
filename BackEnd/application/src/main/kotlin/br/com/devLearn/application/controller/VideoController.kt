@@ -5,6 +5,7 @@ import br.com.devLearn.application.controller.mappers.video.*
 import br.com.devLearn.application.service.VideoService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
@@ -19,16 +20,19 @@ class VideoController(
     private val storeMapper: StoreVideoMapper
 ) {
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @GetMapping
     fun listVideos(@RequestParam(required = false) courseName: String?): List<VideoViewDto>{
         return viewListMapper.map(service.listVideos(courseName))
     }
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): VideoViewDto {
         return viewMapper.map(service.getVideoById(id))
     }
 
+    @PreAuthorize("hasRole('CONTENT_CREATOR')")
     @PostMapping
     fun saveVideo(@RequestBody @Valid dto: StoreVideoDto,
                   uriBuilder: UriComponentsBuilder): ResponseEntity<VideoViewDto>{
@@ -37,6 +41,7 @@ class VideoController(
         return ResponseEntity.created(uri).body(videoView)
     }
 
+    @PreAuthorize("hasRole('CONTENT_CREATOR')")
     @PutMapping("{id}")
     fun updateVideo(@PathVariable id: Long,
                     @RequestBody @Valid videos: UpdateVideoDto): ResponseEntity<VideoViewDto>{
@@ -44,6 +49,7 @@ class VideoController(
         return ResponseEntity.ok(videoView)
     }
 
+    @PreAuthorize("hasRole('CONTENT_CREATOR')")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteVideo(@PathVariable id: Long){

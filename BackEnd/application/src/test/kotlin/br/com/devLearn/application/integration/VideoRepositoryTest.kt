@@ -1,13 +1,7 @@
 package br.com.devLearn.application.integration
 
-import br.com.devLearn.application.model.Category
-import br.com.devLearn.application.model.Course
-import br.com.devLearn.application.model.User
-import br.com.devLearn.application.model.Video
-import br.com.devLearn.application.repository.CategoryRepository
-import br.com.devLearn.application.repository.CourseRepository
-import br.com.devLearn.application.repository.UserRepository
-import br.com.devLearn.application.repository.VideoRepository
+import br.com.devLearn.application.model.*
+import br.com.devLearn.application.repository.*
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -26,6 +20,8 @@ class VideoRepositoryTest {
     private lateinit var categoryRepository: CategoryRepository
     @Autowired
     private lateinit var courseRepository: CourseRepository
+    @Autowired
+    private lateinit var roleRepository: RoleRepository
 
     @AfterEach
     fun tearDown(){
@@ -35,7 +31,8 @@ class VideoRepositoryTest {
     @Test
     fun `Should return all videos after finding them`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val subject = videoRepository.save(Video(0, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity))
@@ -61,7 +58,8 @@ class VideoRepositoryTest {
     @Test
     fun `should return the video after finding it by id`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val subject = Video(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
@@ -80,7 +78,8 @@ class VideoRepositoryTest {
     @Test
     fun `verify if the video is truly deleted`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val subject = Video(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)
@@ -94,7 +93,8 @@ class VideoRepositoryTest {
     @Test
     fun `verify if it return the video after saving it`(){
         //given
-        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma"))
+        val role = listOf(roleRepository.save(Role(1, "ADMIN")))
+        val authorEntity = userRepository.save(User(1, "Kenma123", "12345678", "Kenma", role))
         val categoryEntity = categoryRepository.save(Category(1, "Backend"))
         val courseEntity = courseRepository.save(Course(null, "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity))
         val subject = Video(null, "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)

@@ -5,6 +5,7 @@ import br.com.devLearn.application.controller.mappers.user.*
 import br.com.devLearn.application.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
 import javax.validation.Valid
@@ -16,21 +17,17 @@ class UserController(private val service: UserService,
                      private val viewMapper: UserViewMapper,
                      private val viewListMapper: UserViewListMapper,
                      private val storeMapper: StoreUserMapper) {
-
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @GetMapping
     fun listUsers(): List<UserViewDto> {
         return viewListMapper.map(service.listUsers())
     }
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): UserViewDto {
         return viewMapper.map(service.getUserById(id))
     }
-
-    fun findByUsername(@RequestParam username: String): UserViewDto{
-        return viewMapper.map(service.getByUsername(username))
-    }
-
 
     @PostMapping
     fun singUp(@RequestBody @Valid dto: StoreUserDto,
@@ -40,6 +37,7 @@ class UserController(private val service: UserService,
         return ResponseEntity.created(uri).body(userView)
     }
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @PutMapping("{id}")
     fun updateUser(@PathVariable id: Long,
                    @RequestBody @Valid user: UpdateUserDto): ResponseEntity<UserViewDto>{
@@ -47,6 +45,7 @@ class UserController(private val service: UserService,
         return ResponseEntity.ok(userView)
     }
 
+    @PreAuthorize("hasRole('ROLE_VIEWER')")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable id: Long){

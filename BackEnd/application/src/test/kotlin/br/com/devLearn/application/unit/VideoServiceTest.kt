@@ -1,9 +1,6 @@
 package br.com.devLearn.application.unit
 
-import br.com.devLearn.application.model.Category
-import br.com.devLearn.application.model.Course
-import br.com.devLearn.application.model.User
-import br.com.devLearn.application.model.Video
+import br.com.devLearn.application.model.*
 import br.com.devLearn.application.repository.VideoRepository
 import br.com.devLearn.application.service.VideoService
 import io.mockk.*
@@ -18,7 +15,8 @@ class VideoServiceTest {
 
     private val videoRepository: VideoRepository = mockk(relaxed = true)
     private val videoService = VideoService(videoRepository)
-    private val authorEntity = User(Random.nextLong(0, Long.MAX_VALUE), "Kenma123", "12345678", "Kenma")
+    private val role = listOf(Role(1, "ADMIN"))
+    private val authorEntity = User(Random.nextLong(0, Long.MAX_VALUE), "Kenma123", "12345678", "Kenma", role)
     private val categoryEntity = Category(Random.nextLong(0, Long.MAX_VALUE), "Backend")
     private val courseEntity = Course(Random.nextLong(0, Long.MAX_VALUE), "Spring Boot", "Curso de Spring Boot no Kotlin", authorEntity, categoryEntity)
     private val mockedVideo = Video(Random.nextLong(0, Long.MAX_VALUE), "Introdução", "Introdução sobre spring boot", LocalDate.now(), "https://www.youtube.com/watch?v=j5Tt8bmeCBA", courseEntity)

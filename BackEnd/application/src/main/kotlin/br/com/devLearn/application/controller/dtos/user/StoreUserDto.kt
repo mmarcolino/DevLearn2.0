@@ -1,5 +1,6 @@
 package br.com.devLearn.application.controller.dtos.user
 
+import br.com.devLearn.application.model.Role
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
 
@@ -12,4 +13,6 @@ data class StoreUserDto (
     var password: String,
     @field:NotEmpty
     var name: String,
+    @field:NotEmpty
+    val roles: List<String>
 )
