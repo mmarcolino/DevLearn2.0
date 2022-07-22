@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 
 @Configuration
 @EnableWebSecurity
@@ -20,7 +21,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
     private lateinit var userDetailsService: UserDetailsService
 
     @Bean
-    fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
+    fun bCryptPasswordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
     }
 
