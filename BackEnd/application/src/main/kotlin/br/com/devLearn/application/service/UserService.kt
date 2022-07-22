@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.core.userdetails.User as UserBuilder
 import org.springframework.stereotype.Service
 import javax.transaction.Transactional
@@ -17,7 +18,7 @@ import javax.transaction.Transactional
 class UserService(private val userRepository: UserRepository): UserDetailsService {
 
     @Autowired
-    private lateinit var passwordEncoder: BCryptPasswordEncoder
+    private lateinit var passwordEncoder: PasswordEncoder
 
 
     fun listUsers(): List<User> {
