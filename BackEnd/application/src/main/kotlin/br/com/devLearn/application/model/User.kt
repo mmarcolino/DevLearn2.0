@@ -11,7 +11,7 @@ data class User(
     var username: String,
     var password: String,
     var name: String,
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     val roles: List<Role>
 )
 

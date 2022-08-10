@@ -20,19 +20,19 @@ class CourseController(
     private val storeMapper: StoreCourseMapper
 ) {
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @GetMapping
     fun listCourses(@RequestParam(required = false) categorieName: String?): List<CourseViewDto>{
         return viewListMapper.map(service.listCourses(categorieName))
     }
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): CourseViewDto{
         return viewMapper.map(service.getCourseById(id))
     }
 
-    @PreAuthorize("hasRole('CONTENT_CREATOR')")
+    @PreAuthorize("hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @PostMapping
     fun saveCourse(@RequestBody @Valid dto: StoreCourseDto,
                    uriBuilder: UriComponentsBuilder): ResponseEntity<CourseViewDto>{
@@ -41,7 +41,7 @@ class CourseController(
         return ResponseEntity.created(uri).body(courseView)
     }
 
-    @PreAuthorize("hasRole('CONTENT_CREATOR')")
+    @PreAuthorize("hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @PutMapping("{id}")
     fun updateCourse(@PathVariable id: Long,
         @RequestBody @Valid course: UpdateCourseDto): ResponseEntity<CourseViewDto>{
@@ -49,7 +49,7 @@ class CourseController(
         return ResponseEntity.ok(courseView)
     }
 
-    @PreAuthorize("hasRole('CONTENT_CREATOR')")
+    @PreAuthorize("hasRole('CONTENT_CREATOR') or  hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteCourse(@PathVariable id: Long){
