@@ -33,19 +33,19 @@ class CategoryController(
     private val storeMapper: StoreCategoryMapper
 ) {
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @GetMapping
     fun listCategory(): List<CategoryViewDto>{
         return viewListMapper.map(service.listCategories())
     }
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): CategoryViewDto{
         return viewMapper.map(service.getCategoryById(id))
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('CONTENT_CREATOR')")
     @PostMapping
     fun saveCourse(@RequestBody @Valid dto: StoreCategoryDto,
                    uriBuilder: UriComponentsBuilder):ResponseEntity<CategoryViewDto>{
@@ -54,7 +54,7 @@ class CategoryController(
         return ResponseEntity.created(uri).body(categoryView)
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('CONTENT_CREATOR')")
     @PutMapping("{id}")
     fun updateCategory(@PathVariable id: Long,
                        @RequestBody @Valid category: UpdateCategoryDto): ResponseEntity<CategoryViewDto>{
@@ -62,7 +62,7 @@ class CategoryController(
         return ResponseEntity.ok(categoryView)
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('CONTENT_CREATOR')")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteCategory(@PathVariable id: Long){

@@ -17,13 +17,13 @@ class UserController(private val service: UserService,
                      private val viewMapper: UserViewMapper,
                      private val viewListMapper: UserViewListMapper,
                      private val storeMapper: StoreUserMapper) {
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('ROLE_ADMIN')")
     @GetMapping
     fun listUsers(): List<UserViewDto> {
         return viewListMapper.map(service.listUsers())
     }
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): UserViewDto {
         return viewMapper.map(service.getUserById(id))
@@ -37,7 +37,7 @@ class UserController(private val service: UserService,
         return ResponseEntity.created(uri).body(userView)
     }
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @PutMapping("{id}")
     fun updateUser(@PathVariable id: Long,
                    @RequestBody @Valid user: UpdateUserDto): ResponseEntity<UserViewDto>{
@@ -45,7 +45,7 @@ class UserController(private val service: UserService,
         return ResponseEntity.ok(userView)
     }
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable id: Long){

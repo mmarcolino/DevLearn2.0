@@ -20,19 +20,19 @@ class VideoController(
     private val storeMapper: StoreVideoMapper
 ) {
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('ROLE_ADMIN')")
     @GetMapping
     fun listVideos(@RequestParam(required = false) courseName: String?): List<VideoViewDto>{
         return viewListMapper.map(service.listVideos(courseName))
     }
 
-    @PreAuthorize("hasRole('ROLE_VIEWER')")
+    @PreAuthorize("hasRole('ROLE_VIEWER') or hasRole('ROLE_ADMIN')")
     @GetMapping("{id}")
     fun findById(@PathVariable id: Long): VideoViewDto {
         return viewMapper.map(service.getVideoById(id))
     }
 
-    @PreAuthorize("hasRole('CONTENT_CREATOR')")
+    @PreAuthorize("hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @PostMapping
     fun saveVideo(@RequestBody @Valid dto: StoreVideoDto,
                   uriBuilder: UriComponentsBuilder): ResponseEntity<VideoViewDto>{
@@ -41,7 +41,7 @@ class VideoController(
         return ResponseEntity.created(uri).body(videoView)
     }
 
-    @PreAuthorize("hasRole('CONTENT_CREATOR')")
+    @PreAuthorize("hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @PutMapping("{id}")
     fun updateVideo(@PathVariable id: Long,
                     @RequestBody @Valid videos: UpdateVideoDto): ResponseEntity<VideoViewDto>{
@@ -49,7 +49,7 @@ class VideoController(
         return ResponseEntity.ok(videoView)
     }
 
-    @PreAuthorize("hasRole('CONTENT_CREATOR')")
+    @PreAuthorize("hasRole('CONTENT_CREATOR') or hasRole('ROLE_ADMIN')")
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteVideo(@PathVariable id: Long){

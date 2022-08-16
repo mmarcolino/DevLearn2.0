@@ -1,0 +1,89 @@
+2022/07/28 00:09:38 [emerg] 925#925: directive "server_name" is not terminated by ";" in /mnt/c/test-module/conf/nginx.conf:10
+2022/07/28 00:09:47 [emerg] 927#927: bind() to 0.0.0.0:80 failed (13: Permission denied)
+2022/07/28 00:09:57 [emerg] 929#929: bind() to 0.0.0.0:80 failed (13: Permission denied)
+2022/07/28 00:11:03 [emerg] 963#963: bind() to 0.0.0.0:8083 failed (98: Address already in use)
+2022/07/28 00:11:03 [emerg] 963#963: bind() to 0.0.0.0:8083 failed (98: Address already in use)
+2022/07/28 00:11:03 [emerg] 963#963: bind() to 0.0.0.0:8083 failed (98: Address already in use)
+2022/07/28 00:11:03 [emerg] 963#963: bind() to 0.0.0.0:8083 failed (98: Address already in use)
+2022/07/28 00:11:03 [emerg] 963#963: bind() to 0.0.0.0:8083 failed (98: Address already in use)
+2022/07/28 00:11:03 [emerg] 963#963: still could not bind()
+2022/07/28 00:11:54 [emerg] 974#974: bind() to 0.0.0.0:8089 failed (98: Address already in use)
+2022/07/28 00:11:54 [emerg] 974#974: bind() to 0.0.0.0:8089 failed (98: Address already in use)
+2022/07/28 00:11:54 [emerg] 974#974: bind() to 0.0.0.0:8089 failed (98: Address already in use)
+2022/07/28 00:11:54 [emerg] 974#974: bind() to 0.0.0.0:8089 failed (98: Address already in use)
+2022/07/28 00:11:54 [emerg] 974#974: bind() to 0.0.0.0:8089 failed (98: Address already in use)
+2022/07/28 00:11:54 [emerg] 974#974: still could not bind()
+2022/07/28 00:15:22 [emerg] 983#983: invalid parameter "teste" in /mnt/c/test-module/conf/nginx.conf:8
+2022/07/28 16:19:03 [emerg] 763#763: unexpected "}" in /mnt/c/test-module/conf/nginx.conf:12
+2022/07/28 16:19:12 [emerg] 765#765: unexpected "}" in /mnt/c/test-module/conf/nginx.conf:12
+2022/07/28 16:19:37 [emerg] 767#767: unexpected "}" in /mnt/c/test-module/conf/nginx.conf:12
+2022/07/28 16:19:49 [emerg] 770#770: bind() to 0.0.0.0:8087 failed (98: Address already in use)
+2022/07/28 16:19:49 [emerg] 770#770: bind() to 0.0.0.0:8087 failed (98: Address already in use)
+2022/07/28 16:19:49 [emerg] 770#770: bind() to 0.0.0.0:8087 failed (98: Address already in use)
+2022/07/28 16:19:49 [emerg] 770#770: bind() to 0.0.0.0:8087 failed (98: Address already in use)
+2022/07/28 16:19:49 [emerg] 770#770: bind() to 0.0.0.0:8087 failed (98: Address already in use)
+2022/07/28 16:19:49 [emerg] 770#770: still could not bind()
+2022/07/28 16:22:55 [emerg] 817#817: unexpected "}" in /mnt/c/test-module/conf/nginx.conf:12
+2022/07/28 16:23:55 [emerg] 820#820: unexpected "}" in /mnt/c/test-module/conf/nginx.conf:12
+2022/07/28 16:41:01 [error] 452#452: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "localhost:8060"
+2022/07/28 16:41:28 [error] 452#452: *3 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "localhost:8060"
+2022/07/28 16:41:28 [error] 452#452: *3 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "localhost:8060", referrer: "http://localhost:8060/"
+2022/07/28 16:45:49 [emerg] 461#461: open() "/mnt/c/test-module/conf/nginx.conf]" failed (2: No such file or directory)
+2022/07/28 16:45:52 [emerg] 463#463: bind() to 0.0.0.0:8060 failed (98: Address already in use)
+2022/07/28 16:45:52 [emerg] 463#463: bind() to 0.0.0.0:8060 failed (98: Address already in use)
+2022/07/28 16:45:52 [emerg] 463#463: bind() to 0.0.0.0:8060 failed (98: Address already in use)
+2022/07/28 16:45:52 [emerg] 463#463: bind() to 0.0.0.0:8060 failed (98: Address already in use)
+2022/07/28 16:45:52 [emerg] 463#463: bind() to 0.0.0.0:8060 failed (98: Address already in use)
+2022/07/28 16:45:52 [emerg] 463#463: still could not bind()
+2022/07/28 16:46:22 [error] 467#467: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/swagger.html", host: "localhost:8050"
+2022/07/28 17:01:16 [error] 494#494: *1 "/mnt/c/test-module/html/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8030"
+2022/07/28 17:01:46 [error] 494#494: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET /user HTTP/1.1", upstream: "http://127.0.0.1:8080/user", host: "localhost:8030"
+2022/07/28 17:01:46 [error] 494#494: *2 open() "/mnt/c/test-module/html/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8030", referrer: "http://localhost:8030/user"
+2022/07/28 17:01:58 [error] 494#494: *2 "/mnt/c/test-module/html/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8030"
+2022/07/28 17:01:58 [error] 494#494: *2 "/mnt/c/test-module/html/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8030"
+2022/07/28 17:04:00 [error] 507#507: *1 "/mnt/c/test-module/html/index.html" is not found (2: No such file or directory), client: 127.0.0.1, server: , request: "GET / HTTP/1.1", host: "localhost:8090"
+2022/07/28 17:04:54 [error] 507#507: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /users HTTP/1.1", upstream: "http://127.0.0.1:8080/userss", host: "localhost:8090"
+2022/07/28 17:04:56 [error] 507#507: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /users HTTP/1.1", upstream: "http://127.0.0.1:8080/userss", host: "localhost:8090"
+2022/07/28 17:05:03 [error] 507#507: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /user HTTP/1.1", upstream: "http://127.0.0.1:8080/users", host: "localhost:8090"
+2022/07/28 17:05:16 [error] 507#507: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /user HTTP/1.1", upstream: "http://127.0.0.1:8080/users", host: "localhost:8090"
+2022/07/28 17:05:17 [error] 507#507: *2 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /user HTTP/1.1", upstream: "http://127.0.0.1:8080/users", host: "localhost:8090"
+2022/07/29 13:32:38 [error] 494#494: *6 open() "/mnt/c/test-module/html/favicon.ico" failed (2: No such file or directory), client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", host: "localhost:8030", referrer: "http://localhost:8030/user"
+2022/07/30 02:56:05 [error] 452#452: *8 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "localhost:8060", referrer: "http://localhost:8060/"
+2022/07/30 03:05:22 [error] 452#452: *11 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "localhost:8060", referrer: "http://localhost:8060/"
+2022/08/09 15:40:50 [emerg] 721#721: bind() to 0.0.0.0:8070 failed (98: Address already in use)
+2022/08/09 15:40:50 [emerg] 721#721: bind() to 0.0.0.0:8070 failed (98: Address already in use)
+2022/08/09 15:40:50 [emerg] 721#721: bind() to 0.0.0.0:8070 failed (98: Address already in use)
+2022/08/09 15:40:50 [emerg] 721#721: bind() to 0.0.0.0:8070 failed (98: Address already in use)
+2022/08/09 15:40:50 [emerg] 721#721: bind() to 0.0.0.0:8070 failed (98: Address already in use)
+2022/08/09 15:40:50 [emerg] 721#721: still could not bind()
+2022/08/09 15:42:12 [error] 730#730: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET / HTTP/1.1", upstream: "http://127.0.0.1:8080/", host: "localhost:8050"
+2022/08/09 15:42:12 [error] 730#730: *1 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", upstream: "http://127.0.0.1:8080/favicon.ico", host: "localhost:8050", referrer: "http://localhost:8050/"
+2022/08/09 15:42:43 [error] 730#730: *6 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /users HTTP/1.1", upstream: "http://127.0.0.1:8080/users", host: "localhost:8050"
+2022/08/10 12:02:38 [error] 467#467: *19 connect() failed (113: No route to host) while connecting to upstream, client: 127.0.0.1, server: , request: "GET /swagger-ui/index.html HTTP/1.1", upstream: "http://192.168.0.11:8080/swagger-ui/index.html", host: "localhost:8040"
+2022/08/10 12:02:41 [error] 467#467: *19 connect() failed (113: No route to host) while connecting to upstream, client: 127.0.0.1, server: , request: "GET /favicon.ico HTTP/1.1", upstream: "http://192.168.0.11:8080/favicon.ico", host: "localhost:8040", referrer: "http://localhost:8040/swagger-ui/index.html"
+2022/08/10 13:35:33 [error] 523#523: *8 open() "/mnt/c/test-module/htmlhttp://192.168.0.11:8090//url-authorize" failed (2: No such file or directory), client: 127.0.0.1, server: , request: "POST /videos HTTP/1.1", subrequest: "http://192.168.0.11:8090//url-authorize", host: "localhost:8040"
+2022/08/10 13:35:33 [error] 523#523: *8 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /videos HTTP/1.1", upstream: "http://127.0.0.1:8080/videos", host: "localhost:8040"
+2022/08/10 14:19:13 [error] 523#523: *30 upstream timed out (110: Connection timed out) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /users HTTP/1.1", upstream: "http://192.168.0.11:8080/users", host: "localhost:8040"
+2022/08/10 14:25:50 [error] 523#523: *33 upstream timed out (110: Connection timed out) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /users HTTP/1.1", upstream: "http://192.168.0.11:8080/users", host: "localhost:8040"
+2022/08/10 15:07:31 [error] 523#523: *42 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: , request: "POST /courses HTTP/1.1", upstream: "http://192.168.0.11:8080/courses", host: "localhost:8040"
+2022/08/10 15:15:45 [error] 523#523: *50 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: , request: "POST /courses HTTP/1.1", upstream: "http://192.168.0.11:8080/courses", host: "localhost:8040"
+2022/08/10 15:20:11 [error] 523#523: *56 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: , request: "POST /courses HTTP/1.1", upstream: "http://192.168.0.11:8080/courses", host: "localhost:8040"
+2022/08/10 15:27:16 [error] 523#523: *59 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 127.0.0.1, server: , request: "POST /courses HTTP/1.1", upstream: "http://192.168.0.11:8080/courses", host: "localhost:8040"
+2022/08/10 15:38:34 [error] 523#523: *64 open() "/mnt/c/test-module/htmlhttp://192.168.0.11:8090//url-authorize" failed (2: No such file or directory), client: 127.0.0.1, server: , request: "POST /videos HTTP/1.1", subrequest: "http://192.168.0.11:8090//url-authorize", host: "localhost:8040"
+2022/08/10 15:38:34 [error] 523#523: *64 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /videos HTTP/1.1", upstream: "http://127.0.0.1:8080/videos", host: "localhost:8040"
+2022/08/10 15:39:06 [error] 523#523: *64 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: , request: "POST /courses HTTP/1.1", upstream: "http://192.168.0.11:8080/courses", host: "localhost:8040"
+2022/08/10 15:46:08 [error] 523#523: *69 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 127.0.0.1, server: , request: "POST /courses HTTP/1.1", upstream: "http://192.168.0.11:8080/courses", host: "localhost:8040"
+2022/08/10 15:47:39 [error] 523#523: *69 open() "/mnt/c/test-module/htmlhttp://192.168.0.11:8090//url-authorize" failed (2: No such file or directory), client: 127.0.0.1, server: , request: "POST /videos HTTP/1.1", subrequest: "http://192.168.0.11:8090//url-authorize", host: "localhost:8040"
+2022/08/10 15:47:39 [error] 523#523: *69 connect() failed (111: Connection refused) while connecting to upstream, client: 127.0.0.1, server: , request: "POST /videos HTTP/1.1", upstream: "http://127.0.0.1:8080/videos", host: "localhost:8040"
+2022/08/10 15:48:24 [emerg] 965#965: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:48:24 [emerg] 965#965: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:48:24 [emerg] 965#965: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:48:24 [emerg] 965#965: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:48:24 [emerg] 965#965: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:48:24 [emerg] 965#965: still could not bind()
+2022/08/10 15:49:45 [emerg] 968#968: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:49:45 [emerg] 968#968: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:49:45 [emerg] 968#968: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:49:45 [emerg] 968#968: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:49:45 [emerg] 968#968: bind() to 0.0.0.0:8040 failed (98: Address already in use)
+2022/08/10 15:49:45 [emerg] 968#968: still could not bind()

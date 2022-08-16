@@ -3,7 +3,6 @@ package br.com.devLearn.application.service
 import br.com.devLearn.application.excpetion.NotFoundException
 import br.com.devLearn.application.model.User
 import br.com.devLearn.application.repository.UserRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
@@ -17,9 +16,10 @@ import javax.transaction.Transactional
 @Service
 class UserService(private val userRepository: UserRepository): UserDetailsService {
 
-    @Autowired
-    private lateinit var passwordEncoder: PasswordEncoder
-
+    @Bean
+    fun bCryptpasswordEncoder(): PasswordEncoder {
+        return BCryptPasswordEncoder()
+    }
 
     fun listUsers(): List<User> {
         return userRepository.findAll()
@@ -34,7 +34,7 @@ class UserService(private val userRepository: UserRepository): UserDetailsServic
     }
 
     fun storeUser(user: User): User{
-        user.password = passwordEncoder.encode(user.password)
+        user.password = bCryptpasswordEncoder().encode(user.password)
         userRepository.save(user)
         return user
     }
@@ -46,11 +46,12 @@ class UserService(private val userRepository: UserRepository): UserDetailsServic
     @Transactional
     override fun loadUserByUsername(username: String): UserDetails {
         val user = userRepository.findByUsername(username)?: throw NotFoundException("Usuario não econtrado")
-        val roles = user.roles.map { role -> GrantedAuthority { String.format("ROLE_", role.name) } }
+        val roles = user.roles.map { role -> "ROLE_${role.name}" }
+        val authorities = roles.map { role -> GrantedAuthority { role } }
         return UserBuilder.
         withUsername(user.username).
         password(user.password).
-        authorities(roles).
+        authorities(authorities).
         build()
     }
 
